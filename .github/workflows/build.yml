@@ -1,0 +1,41 @@
+name: Build APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Create Android project
+        run: flutter create --org com.example --project-name namaz_tracker --platforms=android build_app
+
+      - name: Copy app code
+        run: |
+          rm -rf build_app/lib build_app/test build_app/analysis_options.yaml
+          cp -r lib build_app/lib
+          cp pubspec.yaml build_app/pubspec.yaml
+
+      - name: Build APK
+        working-directory: build_app
+        run: |
+          flutter pub get
+          flutter build apk --release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: namaz-tracker-apk
+          path: build_app/build/app/outputs/flutter-apk/app-release.apk
