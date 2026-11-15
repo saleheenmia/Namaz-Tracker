@@ -14,7 +14,7 @@ class ReportApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'রিপোর্ট বই (কর্মী)',
+      title: 'রিপোর্ট বই কর্মী',
       theme: ThemeData(colorSchemeSeed: Colors.green, useMaterial3: true),
       home: const ReportScreen(),
     );
