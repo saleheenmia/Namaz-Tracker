@@ -21,7 +21,7 @@ jobs:
           channel: stable
 
       - name: Create Android project
-        run: flutter create --org com.example --project-name namaz_tracker --platforms=android build_app
+        run: flutter create --org com.example --project-name "রিপোর্ট বই কর্মী" --platforms=android build_app
 
       - name: Copy app code
         run: |
@@ -37,5 +37,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: namaz-tracker-apk
+          name: "রিপোর্ট বই কর্মী"-apk
           path: build_app/build/app/outputs/flutter-apk/app-release.apk
